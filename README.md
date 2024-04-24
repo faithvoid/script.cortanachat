@@ -1,5 +1,5 @@
 # script.cortanachat
-CortanaChat - 1-on-1 instant messaging for XBMC4Xbox. 
+CortanaChat - 1-on-1 IP-based instant messaging for XBMC4Xbox, complete with friends list!
 
 ## Installation:
 - Grab current release file.
