@@ -147,7 +147,7 @@ def main():
                 try:
                     # Connect to the recipient and send the message
                     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    client_socket.connect((ip_address, PORT))
+                    client_socket.connect((ip_address, 3074))
                     client_socket.send("{}: {}".format(username, message).encode())
                     client_socket.close()
                     # Save the sent message
@@ -182,7 +182,7 @@ def main():
                     try:
                         # Connect to the selected friend and send the message
                         client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                        client_socket.connect((selected_ip, PORT))
+                        client_socket.connect((selected_ip, 3074))
                         client_socket.send("{}: {}".format(username, message).encode())
                         client_socket.close()
                         # Save the sent message
