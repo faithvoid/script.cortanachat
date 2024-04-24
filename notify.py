@@ -56,7 +56,7 @@ def save_received_message(message):
 
 # Define the host and port to listen on
 HOST = '0.0.0.0'  # Listen on all available interfaces
-PORT = 5555
+PORT = 3074
 
 # Start the message receiver thread
 message_receiver = MessageReceiver(HOST, PORT)
