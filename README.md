@@ -43,6 +43,7 @@
 - Integrate some sort of user authentication? SSL?
 - Group chat support? (likely possible with one host as a message relay)
 - VoIP / voice chat? (most likely impossible)
+- Basic file transfer? (possible, but needs to be there for a reason). 
 
 ## Bugs:
 - Currently, messages with commas (,) don't show up properly in the notifications. but they'll show up just fine in the "Received Messages" section! So if you receive a (half) blank message, that's probably why. Try not to use them!
