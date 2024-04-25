@@ -391,10 +391,10 @@ def delete_blocked_user():
     
     # Display a dialog with the list of blocked users
     dialog = xbmcgui.Dialog()
-    index = dialog.select("Delete Blocked User", ["{} - {}".format(blocked_user_info[0], blocked_user_info[1]) for blocked_user_info in blocked_user_info_list])
+    index = dialog.select("Block List", ["{} - {}".format(blocked_user_info[0], blocked_user_info[1]) for blocked_user_info in blocked_user_info_list])
     if index != -1:
         selected_blocked_user = blocked_user_info_list[index]
-        delete_confirmation = dialog.yesno("Delete Blocked User", "Are you sure you want to unblock {}?".format(selected_blocked_user[0]))
+        delete_confirmation = dialog.yesno("Unblocking User", "Are you sure you want to unblock {}?".format(selected_blocked_user[0]))
         if delete_confirmation:
             try:
                 # Remove the selected blocked user from the blocklist file
@@ -487,7 +487,7 @@ def friend_options(username):
     while True:
         dialog = xbmcgui.Dialog()
         # Present friend-related options to the user
-        choice = dialog.select("Friends", ["Friends List", "Add Friend", "Edit Friend", "Delete Friend", "Unblock User", "Back"])
+        choice = dialog.select("Friends", ["Friends List", "Add Friend", "Edit Friend", "Delete Friend", "Block List", "Back"])
 
         if choice == 0:  # Friends List
             # Get list of IP addresses from friends list
