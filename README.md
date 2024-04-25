@@ -33,6 +33,7 @@
 - Add timestamps to messages for proper sorting.
 - Add IP addresses to chat logs for easier responding/adding/blocking features.
 - (ie; " [021600][100.100.10.100]Xena1337: What's up! ")
+- Add "Remove Friend" option.
 - Add block functionality.
 - Add anti-spam functionality.
 - Integrate some sort of user authentication?
