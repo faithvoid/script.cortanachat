@@ -18,6 +18,8 @@
 ## To Do:
 - Add timestamps to messages for proper sorting.
 - Add PING/PONG function similar to IRC to check if a user is online or not.
+- Add block functionality.
+- Integrate some sort of user authentication?
 
 ## Bugs:
 - Currently, messages with commas (,) don't show up properly in the notifications. but they'll show up just fine in the "Received Messages" section! So if you receive a (half) blank message, that's probably why. Try not to use them!
