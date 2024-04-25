@@ -32,6 +32,7 @@
 ## To Do:
 - Add anti-spam functionality.
 - Integrate some sort of user authentication?
+- Add SSL?
 - Group chat support? (likely possible with one host as a message relay)
 - VoIP / voice chat? (most likely impossible)
 
