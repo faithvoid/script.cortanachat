@@ -13,6 +13,7 @@ def save_sent_message(message):
 
     # Format the current date
     current_date = datetime.now().strftime('%m%d%y')
+    current_time = datetime.now().strftime('%H:%M:%S')
 
     # Create a log file for the recipient if it doesn't exist
     log_file_path = os.path.join('Q:\\scripts\\CortanaChat\\Sent_Messages', '{}-{}.txt'.format(name, current_date))
@@ -22,7 +23,7 @@ def save_sent_message(message):
 
     # Append the message to the log file
     with open(log_file_path, 'a') as f:
-        f.write(message + '\n')
+        f.write(current_time, ip_address, message + '\n')
 
 # Function to add a friend
 def add_friend():
@@ -108,7 +109,92 @@ def display_messages(message_type):
 
     # Display messages in a dialog with scrollable list
     dialog = xbmcgui.Dialog()
-    dialog.select("{} Messages".format(message_type), formatted_messages)
+    index = dialog.select("{} Messages".format(message_type), formatted_messages)
+    if index != -1:
+        selected_message = parsed_messages[index][1]  # Extract selected message
+        options = ["View Message", "Reply", "Add As Friend", "Block User", "Back"]
+        option_choice = dialog.select("Message Options", options)
+        if option_choice == 0:  # View Message
+            dialog.ok("Selected Message", selected_message)
+        elif option_choice == 1:  # Reply
+            reply_to_user(selected_message)
+        elif option_choice == 2:  # Add As Friend
+            add_as_friend(selected_message)
+        elif option_choice == 3:  # Block User
+            block_user(selected_message)
+
+# Function to add the user as a friend
+def add_as_friend(message):
+    # Splitting the message to get the IP address and username
+    parts = message.split(']')
+    if len(parts) < 2:
+        xbmcgui.Dialog().ok("Error", "Invalid message format.")
+        return
+    
+    sender_ip = parts[0].split('[')[-1].strip()
+    username_message_part = parts[-1].split(':')
+    
+    if len(username_message_part) < 2:
+        xbmcgui.Dialog().ok("Error", "Invalid message format.")
+        return
+    
+    sender_name = username_message_part[0].split(' ')[-1].strip()
+    
+    # Check if the friend already exists in the friends list
+    friend_exists = False
+    try:
+        with open('Q:\\scripts\\CortanaChat\\friends.txt', 'r') as file:
+            for line in file:
+                if sender_name in line and sender_ip in line:
+                    friend_exists = True
+                    break
+    except FileNotFoundError:
+        pass
+    
+    if not friend_exists:
+        # Append sender's name and IP address to the friends list file
+        with open('Q:\\scripts\\CortanaChat\\friends.txt', 'a') as file:
+            file.write('{}:{}\n'.format(sender_name, sender_ip))
+        xbmcgui.Dialog().ok("Success", "{} added as a friend.".format(sender_name))
+    else:
+        xbmcgui.Dialog().ok("Already Exists", "{} is already in your friends list.".format(sender_name))
+
+# Function to block the user
+def block_user(message):
+    # Splitting the message to get the IP address and username
+    parts = message.split(']')
+    if len(parts) < 2:
+        xbmcgui.Dialog().ok("Error", "Invalid message format.")
+        return
+    
+    sender_ip = parts[0].split('[')[-1].strip()
+    username_message_part = parts[-1].split(':')
+    
+    if len(username_message_part) < 2:
+        xbmcgui.Dialog().ok("Error", "Invalid message format.")
+        return
+    
+    sender_name = username_message_part[0].split(' ')[-1].strip()
+    
+    # Check if the user is already blocked
+    user_blocked = False
+    try:
+        with open('Q:\\scripts\\CortanaChat\\blocklist.txt', 'r') as file:
+            for line in file:
+                if sender_name in line and sender_ip in line:
+                    user_blocked = True
+                    break
+    except FileNotFoundError:
+        pass
+    
+    if not user_blocked:
+        # Append sender's name and IP address to the blocklist file
+        with open('Q:\\scripts\\CortanaChat\\blocklist.txt', 'a') as file:
+            file.write('{}:{}\n'.format(sender_name, sender_ip))
+        xbmcgui.Dialog().ok("Success", "{} blocked successfully.".format(sender_name))
+    else:
+        xbmcgui.Dialog().ok("Already Blocked", "{} is already blocked.".format(sender_name))
+
 
 
 # Function to get username from the user
@@ -246,6 +332,110 @@ def edit_friend(friend_name, friend_ip):
     except Exception as e:
         xbmc.log("Error updating details for %s - %s" % (new_name, str(e)))
 
+# Function to delete a friend from the friends list
+def delete_friend():
+    # Read and display the friends list
+    friends = []
+    try:
+        with open('Q:\\scripts\\CortanaChat\\friends.txt', 'r') as file:
+            friends = file.readlines()
+    except FileNotFoundError:
+        pass
+    
+    # Create a list of tuples with friend name, IP, and online/offline status
+    friend_info_list = []
+    for friend in friends:
+        friend_name, friend_ip = friend.strip().split(':')
+        friend_info_list.append((friend_name, friend_ip))
+    
+    # Display a dialog with the list of friends
+    dialog = xbmcgui.Dialog()
+    index = dialog.select("Delete Friend", ["{} - {}".format(friend_info[0], friend_info[1]) for friend_info in friend_info_list])
+    if index != -1:
+        selected_friend = friend_info_list[index]
+        delete_confirmation = dialog.yesno("Delete Friend", "Are you sure you want to delete {}?".format(selected_friend[0]))
+        if delete_confirmation:
+            try:
+                # Remove the selected friend from the friends list file
+                with open('Q:\\scripts\\CortanaChat\\friends.txt', 'w') as file:
+                    for friend in friends:
+                        if friend.split(':')[0] != selected_friend[0]:
+                            file.write(friend)
+                xbmcgui.Dialog().ok("Success", "{} deleted successfully.".format(selected_friend[0]))
+            except Exception as e:
+                xbmc.log("Error deleting friend - %s" % str(e))
+    xbmc.sleep(1000)
+
+# Function to delete a blocked user from the blocklist
+def delete_blocked_user():
+    # Read and display the blocklist
+    blocked_users = []
+    try:
+        with open('Q:\\scripts\\CortanaChat\\blocklist.txt', 'r') as file:
+            blocked_users = file.readlines()
+    except FileNotFoundError:
+        pass
+    
+    # Create a list of tuples with blocked user name and IP
+    blocked_user_info_list = []
+    for blocked_user in blocked_users:
+        # Check if the line contains at least two values separated by colon
+        if ':' in blocked_user:
+            blocked_user_name, blocked_user_ip = blocked_user.strip().split(':', 1)
+            blocked_user_info_list.append((blocked_user_name, blocked_user_ip))
+        else:
+            xbmc.log("Invalid format in blocklist.txt: {}".format(blocked_user))
+    
+    # Display a dialog with the list of blocked users
+    dialog = xbmcgui.Dialog()
+    index = dialog.select("Delete Blocked User", ["{} - {}".format(blocked_user_info[0], blocked_user_info[1]) for blocked_user_info in blocked_user_info_list])
+    if index != -1:
+        selected_blocked_user = blocked_user_info_list[index]
+        delete_confirmation = dialog.yesno("Delete Blocked User", "Are you sure you want to unblock {}?".format(selected_blocked_user[0]))
+        if delete_confirmation:
+            try:
+                # Remove the selected blocked user from the blocklist file
+                with open('Q:\\scripts\\CortanaChat\\blocklist.txt', 'w') as file:
+                    for blocked_user in blocked_users:
+                        if blocked_user.split(':')[0] != selected_blocked_user[0]:
+                            file.write(blocked_user)
+                xbmcgui.Dialog().ok("Success", "{} unblocked successfully.".format(selected_blocked_user[0]))
+            except Exception as e:
+                xbmc.log("Error unblocking user - %s" % str(e))
+    xbmc.sleep(1000)
+
+# Function to send a message to a recipient
+def reply_to_user(message):
+    # Splitting the message to get the IP address
+    parts = message.split(']')
+    if len(parts) < 2:
+        xbmcgui.Dialog().ok("Error", "Invalid message format.")
+        return
+    
+    ip_address = parts[0].split('[')[-1].strip()
+    username = get_username()
+    sender_name = message.split(']')[-1].split(':')[0].split()[-1]
+    
+    # Prompt user to enter message
+    keyboard = xbmc.Keyboard('', 'Enter your message to {}:'.format(sender_name))
+    keyboard.doModal()
+    message_text = keyboard.getText()
+    
+    # Check if user confirmed message input
+    if keyboard.isConfirmed() and message_text:
+        try:
+            # Connect to the recipient and send the message
+            client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            client_socket.connect((ip_address, 3074))  # Change port number if needed
+            client_socket.send("{}: {}".format(username, message_text).encode())
+            client_socket.close()
+            
+            # Display confirmation message
+            xbmcgui.Dialog().ok("Message Sent", "Message sent to {} at IP address {}.".format(ip_address))
+        except Exception as e:
+            xbmc.log("Error sending message - %s" % str(e))
+
+
 # Function to handle message-related options
 def message_options(username):
     while True:
@@ -294,7 +484,7 @@ def friend_options(username):
     while True:
         dialog = xbmcgui.Dialog()
         # Present friend-related options to the user
-        choice = dialog.select("Friends", ["Friends List", "Add Friend", "Edit Friends", "Back"])
+        choice = dialog.select("Friends", ["Friends List", "Add Friend", "Edit Friend", "Delete Friend", "Unblock User", "Back"])
 
         if choice == 0:  # Friends List
             # Get list of IP addresses from friends list
@@ -331,7 +521,13 @@ def friend_options(username):
         elif choice == 2:  # Edit Friends
             edit_friends()
 
-        elif choice == 3:  # Back
+        elif choice == 3:  # Delete Friend
+            delete_friend()
+
+        elif choice == 4:  # Back
+            delete_blocked_user()
+
+        elif choice == 5:  # Back
             break
 
 	else:
