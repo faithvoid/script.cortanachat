@@ -17,7 +17,6 @@
 
 ## To Do:
 - Add timestamps to messages for proper sorting.
-- Add PING/PONG function similar to IRC to check if a user is online or not.
 - Add block functionality.
 - Integrate some sort of user authentication?
 
