@@ -25,10 +25,14 @@ class MessageReceiver(threading.Thread):
                 # Receive data from the client
                 data = client_socket.recv(1024)
                 if data:
-                    # Display a notification for new chat messages
-                    xbmc.executebuiltin('Notification(%s, %s)' % ("New chat!", data))
-                    # Save the received message
-                    save_received_message(data.decode())
+                    # Handle PING/PONG mechanism
+                    if data.decode() == 'CORTANAPING':
+                        client_socket.send(b'CORTANAPONG')
+                    else:
+                        # Display a notification for new chat messages
+                        xbmc.executebuiltin('Notification(%s, %s)' % ("New chat!", data))
+                        # Save the received message
+                        save_received_message(data.decode())
                 client_socket.close()
         except Exception as e:
             xbmc.log("MessageReceiver: Error - %s" % str(e))
