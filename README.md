@@ -18,7 +18,7 @@
 ## To Do:
 - Add timestamps to messages for proper sorting.
 - Add IP addresses to chat logs for easier responding/adding/blocking features.
-- (ie; " [100.100.10.100][021600]Xena1337: What's up! ")
+- (ie; " [021600][100.100.10.100]Xena1337: What's up! ")
 - Add "Edit Username" to change your username.
 - Add "Edit Friends" function that allows you to edit the name/IP address of an added friend.
 - Add block functionality.
