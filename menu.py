@@ -241,7 +241,7 @@ def ping_friend(ip_address):
         client_socket.connect((ip_address, 3074))
         client_socket.send(b'CORTANAPING')
         # Wait for a response (CORTANAPONG)
-        response = client_socket.recv(1024)
+        response = client_socket.recv(512)
         client_socket.close()
         if response.decode() == 'CORTANAPONG':
             return True  # Friend is online
