@@ -22,6 +22,8 @@
 - Don't know your external IP address? Click "Show IP Address", tell your friend your IP, and now you both can chat Xbox to Xbox!
 
 # FAQ:
+- "My friends list is a bit slow to load?"
+- This is to be expected, as when you open your friends list, a "PING" request is sent from your console to all of your friends' consoles to verify their online status. This can take a second or two, especially on slower connections / if you have more friends added.
 - "I was able to message my friend, but now I can't?"
 - Your friend's IP probably changed, you can edit their IP in the "Edit Friends" section on the Friends menu!
 - "How secure is this?"
