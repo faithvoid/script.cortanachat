@@ -3,9 +3,9 @@
 ![menu1](https://github.com/faithvoid/script.cortanachat/assets/56975081/3c343100-242a-4cb8-acfb-978aa2554a3d)
 ![messagemenu](https://github.com/faithvoid/script.cortanachat/assets/56975081/bccf1a84-b0b0-4cfe-81a1-f50ffa5edfec)
 ![receivedmessages](https://github.com/faithvoid/script.cortanachat/assets/56975081/9f3db6d2-5332-49dd-b7f9-2c79c46cb492)
-![sentmessages](https://github.com/faithvoid/script.cortanachat/assets/56975081/d55d4b84-b81b-4800-b709-53312443b83b)!
+![sentmessages](https://github.com/faithvoid/script.cortanachat/assets/56975081/d55d4b84-b81b-4800-b709-53312443b83b)
 ![friendmenu](https://github.com/faithvoid/script.cortanachat/assets/56975081/84673169-a13f-4b2b-a4e6-1d1747947dc0)
-[friends](https://github.com/faithvoid/script.cortanachat/assets/56975081/b0f9de41-05fe-43e1-a6c7-76829861c467)
+![friends](https://github.com/faithvoid/script.cortanachat/assets/56975081/b0f9de41-05fe-43e1-a6c7-76829861c467)
 ![settingsmenu](https://github.com/faithvoid/script.cortanachat/assets/56975081/7652fcc7-3e96-4bae-9eca-4335adfbb6fe)
 ![notification](https://github.com/faithvoid/script.cortanachat/assets/56975081/a9498a0d-9fea-4338-9abe-5d48e901239e)
 
