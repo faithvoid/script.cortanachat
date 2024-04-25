@@ -9,6 +9,14 @@
 ![settingsmenu](https://github.com/faithvoid/script.cortanachat/assets/56975081/7652fcc7-3e96-4bae-9eca-4335adfbb6fe)
 ![notification](https://github.com/faithvoid/script.cortanachat/assets/56975081/a9498a0d-9fea-4338-9abe-5d48e901239e)
 
+## Features:
+- Have 1-on-1 chats with your friends, directly on your Xbox!
+- Integrated Friends List capabilities lets you message/add/remove/block friends quickly, check their online statuses, and more!
+- Check your sent & received messages & compose a new message to users not on your friends list easily!
+- No backend servers means never (and always) out of date! As long as you've got an IPv4 address, you've got a chat client for your Xbox!
+- Don't know your external IP? Go into Settings and click "Show IP Address"!
+- UI is designed to be close to the Xbox 360's for ease of use!
+
 ## Installation:
 - Grab current release file.
 - Unzip "CortanaChat" into the scripts folder your XBMC4Xbox installation, usually "Q:/scripts/". DO NOT RENAME THE FOLDER!
@@ -27,10 +35,10 @@
 - "I was able to message my friend, but now I can't?"
 - Your friend's IP probably changed, you can edit their IP in the "Edit Friends" section on the Friends menu!
 - "How secure is this?"
-- Not very. It's all plaintext sent directly to a port, a-la IRC, so don't send anything you wouldn't want the entire world seeing. Also, be careful who you give your IP address to, as there are bad actors out there who could use it for nefarious purposes! Only add people you trust! I'd recommend using a VPN/proxy if you're concerned, but also you're already connecting to the internet on a 20+ year old console, so...
+- Not very. It's all plaintext sent with no encryption from IP to IP, a-la IRC, so don't send anything you wouldn't want the entire world seeing. Also, be careful who you give your IP address to, as there are bad actors out there who could use it for nefarious purposes! Only add people you trust! I'd recommend using a VPN/proxy if you're concerned, but also you're already connecting to the internet on a 20+ year old console, so... (although I do want to see how feasible integrating SSL is after the primary code is complete).
 
 ## To Do:
-- Add anti-spam functionality.
+- Add anti-spam functionality. 
   Try to keep messages within 512 bytes (iirc Xbox 360 messages work this way, with a 500 character limit with the first 12 characters being reserved for the Gamertag).
 - Integrate some sort of user authentication? SSL?
 - Group chat support? (likely possible with one host as a message relay)
