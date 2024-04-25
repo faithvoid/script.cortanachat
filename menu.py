@@ -346,6 +346,9 @@ def settings_options():
 
         elif choice == 2:  # Back
             break
+				
+	else:
+	    break
 
 # Main loop to interact with the user and send/receive messages
 def main():
@@ -369,6 +372,9 @@ def main():
 
         elif choice == 3:  # Exit
             break  # Exit the loop
+		
+	else:
+	    break
 
 # Entry point
 if __name__ == '__main__':
