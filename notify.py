@@ -22,31 +22,45 @@ class MessageReceiver(threading.Thread):
             while self.running:
                 # Accept incoming connections
                 client_socket, addr = server_socket.accept()
-                # Receive data from the client
-                data = client_socket.recv(1024)
-                if data:
-                    # Handle PING/PONG mechanism
-                    if data.decode() == 'CORTANAPING':
-                        client_socket.send(b'CORTANAPONG')
-                    else:
-                        # Display a notification for new chat messages
-                        xbmc.executebuiltin('Notification(%s, %s)' % ("New chat!", data))
-                        # Save the received message
-                        save_received_message(data.decode())
-                client_socket.close()
+                # Check if the sender is in the blocklist
+                if not is_blocked(addr[0]):
+                    # Receive data from the client
+                    data = client_socket.recv(1024)
+                    if data:
+                        # Handle PING/PONG mechanism
+                        if data.decode() == 'CORTANAPING':
+                            client_socket.send(b'CORTANAPONG')
+                        else:
+                            # Save the received message
+                            xbmc.executebuiltin('Notification(%s, %s)' % ("New chat!", data))
+                            save_received_message(data.decode(), addr[0])
+                    client_socket.close()
+                else:
+                    client_socket.close()
         except Exception as e:
-            xbmc.log("MessageReceiver: Error - %s" % str(e))
+            print("MessageReceiver: Error - %s" % str(e))
 
     def stop(self):
         self.running = False
 
+# Function to check if the sender is in the blocklist
+def is_blocked(ip_address):
+    blocklist_file = 'Q:\\scripts\\CortanaChat\\blocklist.txt'
+    if os.path.exists(blocklist_file):
+        with open(blocklist_file, 'r') as f:
+            for line in f:
+                if ip_address in line:
+                    return True
+    return False
+
 # Function to save received messages
-def save_received_message(message):
+def save_received_message(message, ip_address):
     # Extract sender's name from the message
     name = message.split(':')[0].strip()
 
     # Format the current date
     current_date = datetime.now().strftime('%m%d%y')
+    current_time = datetime.now().strftime('%H:%M:%S')
 
     # Create a log file for the sender if it doesn't exist
     log_file_path = os.path.join('Q:\\scripts\\CortanaChat\\Received_Messages', '{}-{}.txt'.format(name, current_date))
@@ -56,7 +70,7 @@ def save_received_message(message):
 
     # Append the message to the log file
     with open(log_file_path, 'a') as f:
-        f.write(message + '\n')
+        f.write("[{}][{}] {}\n".format(current_time, ip_address, message))
 
 # Define the host and port to listen on
 HOST = '0.0.0.0'  # Listen on all available interfaces
