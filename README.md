@@ -30,7 +30,6 @@
 - Not very. It's all plaintext sent directly to a port, a-la IRC, so don't send anything you wouldn't want the entire world seeing. Also, be careful who you give your IP address to, as there are bad actors out there who could use it for nefarious purposes! Only add people you trust! I'd recommend using a VPN/proxy if you're concerned, but also you're already connecting to the internet on a 20+ year old console, so...
 
 ## To Do:
-- Fix "Sent Messages" being blank due to new timestamp system. 
 - Add anti-spam functionality.
 - Integrate some sort of user authentication?
 - Group chat support? (likely possible with one host as a message relay)
