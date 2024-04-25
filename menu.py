@@ -359,13 +359,13 @@ def main():
         xbmc.executebuiltin('Action(Back)')  # Handle XBMC's back action
         dialog = xbmcgui.Dialog()
         # Present options to the user
-        choice = dialog.select("Cortana Chat", ["Messages", "Friends", "Settings", "Exit"])
+        choice = dialog.select("Cortana Chat", ["Friends", "Messages", "Settings", "Exit"])
 
-        if choice == 0:  # Messages
-            message_options(username)
-
-        elif choice == 1:  # Friends
+        if choice == 0:  # Friends
             friend_options(username)
+
+        elif choice == 1:  # Messages
+            message_options(username)
 
         elif choice == 2:  # Settings
             settings_options()
