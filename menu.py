@@ -121,7 +121,7 @@ def display_messages(message_type):
         elif option_choice == 2:  # Add As Friend
             add_as_friend(selected_message)
         elif option_choice == 3:  # Delete Message
-            block_user(selected_message)
+            dialog.ok("Not Yet Implemented", "Coming soon!")
         elif option_choice == 4:  # Block User
             block_user(selected_message)
 
