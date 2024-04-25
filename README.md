@@ -17,7 +17,10 @@
 
 ## To Do:
 - Add timestamps to messages for proper sorting.
+- Add "Edit Username" to change your username.
+- Add "Edit Friends" function that allows you to edit the name/IP address of an added friend.
 - Add block functionality.
+- Add anti-spam functionality.
 - Integrate some sort of user authentication?
 
 ## Bugs:
