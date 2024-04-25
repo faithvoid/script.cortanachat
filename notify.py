@@ -25,7 +25,7 @@ class MessageReceiver(threading.Thread):
                 # Check if the sender is in the blocklist
                 if not is_blocked(addr[0]):
                     # Receive data from the client
-                    data = client_socket.recv(1024)
+                    data = client_socket.recv(512)
                     if data:
                         # Handle PING/PONG mechanism
                         if data.decode() == 'CORTANAPING':
