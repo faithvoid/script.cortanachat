@@ -88,15 +88,28 @@ def display_messages(message_type):
     except FileNotFoundError:
         pass
 
-    # Sort messages by date in descending order (most recent first)
-    try:
-        messages.sort(key=lambda x: datetime.strptime(x.split('-')[1].strip().split('.')[0], '%m%d%y'), reverse=True)
-    except (IndexError, ValueError):
-        xbmc.log("Error sorting messages: Invalid date format or file naming convention.")
+    # Parse timestamps and messages
+    parsed_messages = []
+    for msg in messages:
+        # Extract timestamp and message content
+        timestamp_start = msg.find('[')
+        timestamp_end = msg.find(']')
+        if timestamp_start != -1 and timestamp_end != -1:
+            timestamp = msg[timestamp_start + 1:timestamp_end]
+            message_content = msg[timestamp_end + 1:].strip()
+            # Append (timestamp, message) tuple to parsed_messages list
+            parsed_messages.append((timestamp, message_content))
+
+    # Sort messages by timestamp in descending order (most recent first)
+    parsed_messages.sort(key=lambda x: datetime.strptime(x[0], '%H:%M:%S'), reverse=True)
+
+    # Format messages for display (without timestamp and IP)
+    formatted_messages = [msg[1][msg[1].find(']') + 1:].strip() for msg in parsed_messages]
 
     # Display messages in a dialog with scrollable list
     dialog = xbmcgui.Dialog()
-    dialog.select("{} Messages".format(message_type), messages)
+    dialog.select("{} Messages".format(message_type), formatted_messages)
+
 
 # Function to get username from the user
 def get_username():
