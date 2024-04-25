@@ -23,7 +23,7 @@ def save_sent_message(message):
 
     # Append the message to the log file
     with open(log_file_path, 'a') as f:
-        f.write(current_time, ip_address, message + '\n')
+        f.write("[{}][{}] {}\n".format(current_time, "0.0.0.0", message))
 
 # Function to add a friend
 def add_friend():
