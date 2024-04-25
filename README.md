@@ -31,8 +31,8 @@
 
 ## To Do:
 - Add anti-spam functionality.
-- Integrate some sort of user authentication?
-- Add SSL?
+  Try to keep messages within 512 bytes (iirc Xbox 360 messages work this way, with a 500 character limit with the first 12 characters being reserved for the Gamertag).
+- Integrate some sort of user authentication? SSL?
 - Group chat support? (likely possible with one host as a message relay)
 - VoIP / voice chat? (most likely impossible)
 
