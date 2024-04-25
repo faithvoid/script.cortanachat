@@ -112,7 +112,7 @@ def display_messages(message_type):
     index = dialog.select("{} Messages".format(message_type), formatted_messages)
     if index != -1:
         selected_message = parsed_messages[index][1]  # Extract selected message
-        options = ["View Message", "Reply", "Add As Friend", "Block User", "Back"]
+        options = ["View Message", "Reply", "Add As Friend", "Delete", "Block User", "Back"]
         option_choice = dialog.select("Message Options", options)
         if option_choice == 0:  # View Message
             dialog.ok("Selected Message", selected_message)
@@ -120,8 +120,11 @@ def display_messages(message_type):
             reply_to_user(selected_message)
         elif option_choice == 2:  # Add As Friend
             add_as_friend(selected_message)
-        elif option_choice == 3:  # Block User
+        elif option_choice == 3:  # Delete Message
             block_user(selected_message)
+        elif option_choice == 4:  # Block User
+            block_user(selected_message)
+
 
 # Function to add the user as a friend
 def add_as_friend(message):
