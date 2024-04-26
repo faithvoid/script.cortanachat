@@ -38,7 +38,10 @@
 - Not very. It's all plaintext sent with no encryption from IP to IP, a-la IRC, so don't send anything you wouldn't want the entire world seeing. Also, be careful who you give your IP address to, as there are bad actors out there who could use it for nefarious purposes! Only add people you trust! I'd recommend using a VPN/proxy if you're concerned, but also you're already connecting to the internet on a 20+ year old console, so... (although I do want to see how feasible integrating SSL is after the primary code is complete).
 
 ## To Do:
-- Add anti-spam functionality. 
+- Fix message sorting (as some bug currently leads to older messages occasionally being shown first)
+- Add anti-spam functionality.
+- Set daily message limit to 150 (like Xbox 360).
+- Block users from messaging offline users (as the messaging functionality requires both users be online at the same time). 
   Try to keep messages within 512 bytes (iirc Xbox 360 messages work this way, with a 500 character limit with the first 12 characters being reserved for the Gamertag).
 - Integrate some sort of user authentication? SSL? Maybe pull the username from the XBMC profile instead of name.txt instead?
 - Group chat support? (likely possible with one host as a message relay)
