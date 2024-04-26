@@ -1,6 +1,7 @@
 import socket
 import threading
 import os
+import re
 from datetime import datetime
 
 # Define a class for receiving messages in a separate thread
@@ -18,7 +19,7 @@ class MessageReceiver(threading.Thread):
             server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             server_socket.bind((self.host, self.port))
             server_socket.listen(1)
-            print("MessageReceiver: Listening for messages...")
+            print("MessageReceiver: Listening for messages on {}:{}".format(self.host, self.port))
             while self.running:
                 # Accept incoming connections
                 client_socket, addr = server_socket.accept()
@@ -32,7 +33,6 @@ class MessageReceiver(threading.Thread):
                             client_socket.send(b'CORTANAPONG')
                         else:
                             # Save the received message
-                            xbmc.executebuiltin('Notification(%s, %s)' % ("New chat!", data))
                             save_received_message(data.decode(), addr[0])
                     client_socket.close()
                 else:
@@ -53,6 +53,14 @@ def is_blocked(ip_address):
                     return True
     return False
 
+# Function to sanitize file names
+def sanitize_file_name(name):
+    # Replace special characters with underscores
+    sanitized_name = re.sub(r'[^\w\-_. ]', '_', name)
+    # Limit the length of the name to accommodate date and extension
+    max_name_length = 38  # Adjusted to accommodate date and extension
+    return sanitized_name[:max_name_length]
+
 # Function to save received messages
 def save_received_message(message, ip_address):
     # Extract sender's name from the message
@@ -60,17 +68,36 @@ def save_received_message(message, ip_address):
 
     # Format the current date
     current_date = datetime.now().strftime('%m%d%y')
-    current_time = datetime.now().strftime('%H:%M:%S')
+    current_time = datetime.now().strftime('%H-%M-%S')
+
+    # Sanitize the name for use in the file name
+    sanitized_name = sanitize_file_name(name)
 
     # Create a log file for the sender if it doesn't exist
-    log_file_path = os.path.join('Q:\\scripts\\CortanaChat\\Received_Messages', '{}-{}.txt'.format(name, current_date))
+    log_file_name = '{}-{}.txt'.format(sanitized_name, current_date)
+    log_file_path = os.path.join('Q:\\scripts\\CortanaChat\\Received_Messages', log_file_name)
+    
+    # Check if the total length exceeds 42 characters
+    if len(log_file_path) > 42:
+        # Calculate the maximum length for the sender's name
+        max_name_length = 38 - (len(current_date) + len('.txt') + 1)  # 1 for the hyphen before the timestamp
+        # Truncate the sender's name
+        sanitized_name = sanitized_name[:max_name_length]
+
+        # Recreate the log file path
+        log_file_name = '{}-{}.txt'.format(sanitized_name, current_date)
+        log_file_path = os.path.join('Q:\\scripts\\CortanaChat\\Received_Messages', log_file_name)
+
     if not os.path.exists(log_file_path):
         with open(log_file_path, 'w'):
             pass
 
     # Append the message to the log file
     with open(log_file_path, 'a') as f:
-        f.write("[{}][{}] {}\n".format(current_time, ip_address, message))
+        f.write("[{}][{}] {}\n".format(current_time.replace('-', ':'), ip_address, message))
+
+    # Notify XBMC about the new message
+    xbmc.executebuiltin('Notification(%s, %s)' % ("New chat!", message))
 
 # Define the host and port to listen on
 HOST = '0.0.0.0'  # Listen on all available interfaces
