@@ -1,5 +1,5 @@
 # Cortana Chat
-## 1-on-1 IP-based instant messaging for XBMC4Xbox, complete with friends list!
+## 1-on-1 IP-based messaging for XBMC4Xbox, complete with friends list!
 ![menu1](https://github.com/faithvoid/script.cortanachat/assets/56975081/638e1f82-708d-4ca5-bea8-d17300487b60)
 ![messagemenu](https://github.com/faithvoid/script.cortanachat/assets/56975081/bccf1a84-b0b0-4cfe-81a1-f50ffa5edfec)
 ![receivedmessages](https://github.com/faithvoid/script.cortanachat/assets/56975081/9f3db6d2-5332-49dd-b7f9-2c79c46cb492)
