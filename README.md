@@ -16,6 +16,7 @@
 - No backend servers means never (and always) out of date! As long as you've got an IPv4 address, you've got a chat client for your Xbox!
 - Don't know your external IP? Go into Settings and click "Show IP Address"!
 - UI is designed to be close to the Xbox 360's for ease of use!
+- Built using IRC philosophy & 
 
 ## Installation:
 - Grab current release file.
@@ -36,6 +37,8 @@
 - Your friend's IP probably changed, you can edit their IP in the "Edit Friends" section on the Friends menu!
 - "How secure is this?"
 - Not very. It's all plaintext sent with no encryption from IP to IP, a-la IRC, so don't send anything you wouldn't want the entire world seeing. Also, be careful who you give your IP address to, as there are bad actors out there who could use it for nefarious purposes! Only add people you trust! I'd recommend using a VPN/proxy if you're concerned, but also you're already connecting to the internet on a 20+ year old console, so... (although I do want to see how feasible integrating SSL is after the primary code is complete).
+- "Is there an easier way to message my friend than getting their IP address?"
+- Unfortunately, not really, without getting an additional server that handles things such as usernames involved. Think of it like entering a phone number to call a friend!
 
 ## To Do:
 - Fix message sorting (as some bug currently leads to older messages occasionally being shown first)
