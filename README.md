@@ -40,7 +40,7 @@
 ## To Do:
 - Add anti-spam functionality. 
   Try to keep messages within 512 bytes (iirc Xbox 360 messages work this way, with a 500 character limit with the first 12 characters being reserved for the Gamertag).
-- Integrate some sort of user authentication? SSL?
+- Integrate some sort of user authentication? SSL? Maybe pull the username from the XBMC profile instead of name.txt instead?
 - Group chat support? (likely possible with one host as a message relay)
 - VoIP / voice chat? (most likely impossible)
 - Basic file transfer? (possible, but needs to be there for a reason). 
