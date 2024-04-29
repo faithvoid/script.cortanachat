@@ -16,7 +16,7 @@
 - No backend servers means never (and always) out of date! As long as you've got an IPv4 address, you've got a chat client for your Xbox!
 - Don't know your external IP? Go into Settings and click "Show IP Address"!
 - UI is designed to be close to the Xbox 360's for ease of use!
-- Built using IRC philosophy & 
+- Built using IRC philosophy & Xbox 360 design language.
 
 ## Installation:
 - Grab current release file.
