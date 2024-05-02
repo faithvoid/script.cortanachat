@@ -48,8 +48,8 @@
   Try to keep messages within 512 bytes (iirc Xbox 360 messages work this way, with a 500 character limit with the first 12 characters being reserved for the Gamertag).
 - Integrate some sort of user authentication? SSL? Maybe pull the username from the XBMC profile instead of name.txt instead?
 - Group chat support? (likely possible with one host as a message relay)
-- VoIP / voice chat? (most likely impossible)
-- Voice Messages(?) (Still unlikely, but more probable than proper VoIP.)
+- Voice Messages(?) (Seems possible as XBMC4Xbox supports the Communicator, at least for karaoke. Building to to these 360 standards: 15-second clips @ 64kbps with a 20-message storage limit. Will have to try after getting a Hawk or puck.)
+- VoIP / voice chat? (Also maybe possible? Most likely won't be able to use any sort of voice processing effects so no voice masking or anything, but direct audio-to-audio should, in theory, work. Plan is to target 64kbps.)
 - Basic file transfer? (possible, but needs to be there for a reason). 
 
 ## Bugs:
