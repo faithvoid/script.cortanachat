@@ -41,6 +41,7 @@
 - Unfortunately, not really, without getting an additional server that handles things such as usernames involved. Think of it like entering a phone number to call a friend!
 
 ## To Do:
+- Migrate this to AT protocol (maybe self-host a Bluesky instance specifically for XBMC4Xbox?)
 - Integrate some sort of user authentication? SSL? Maybe pull the username from the XBMC profile instead of name.txt instead or tie usernames to Xbox serial number?
 - Fix message sorting (as some bug currently leads to older messages occasionally being shown first)
 - Add anti-spam functionality.
